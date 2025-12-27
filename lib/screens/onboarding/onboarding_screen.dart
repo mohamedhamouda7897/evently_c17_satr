@@ -6,6 +6,9 @@ class OnboardingScreen extends StatelessWidget {
 
   const OnboardingScreen({super.key});
 
+  final bool isEnglish = false;
+  final bool isDark = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,28 +65,9 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: Color(0xFF5669FF),
-                                width: 3,
-                              ),
-                            ),
-                            child: Image.asset(
-                              "assets/images/LR.png",
-                              width: 26,
-                              height: 24,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          _countryWidget(isEnglish, "LR"),
                           SizedBox(width: 16),
-                          Image.asset(
-                            "assets/images/EG.png",
-                            width: 26,
-                            height: 24,
-                            fit: BoxFit.cover,
-                          ),
+                          _countryWidget(!isEnglish, "EG"),
                         ],
                       ),
                     ),
@@ -107,27 +91,9 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFF5669FF),
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: Color(0xFF5669FF),
-                                width: 3,
-                              ),
-                            ),
-                            child: ImageIcon(
-                              AssetImage("assets/images/Sun.png"),
-                              size: 25,
-                              color: Color(0xFFF2FEFF),
-                            ),
-                          ),
+                          _getThemeWidget(!isDark, "Sun"),
                           SizedBox(width: 16),
-                          ImageIcon(
-                            AssetImage("assets/images/Moon.png"),
-                            size: 25,
-                            color: Color(0xFF5669FF),
-                          ),
+                          _getThemeWidget(isDark, "Moon"),
                         ],
                       ),
                     ),
@@ -159,6 +125,41 @@ class OnboardingScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _getThemeWidget(bool isDark, String iconName) {
+    return Container(
+      decoration: isDark
+          ? null
+          : BoxDecoration(
+              color: Color(0xFF5669FF),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Color(0xFF5669FF), width: 3),
+            ),
+      child: ImageIcon(
+        AssetImage("assets/images/$iconName.png"),
+        size: 25,
+        color: isDark ? Color(0xFF5669FF) : Color(0xFFF2FEFF),
+        // color: Color(0xFFF2FEFF),
+      ),
+    );
+  }
+
+  Widget _countryWidget(bool isSelected, String imageName) {
+    return Container(
+      decoration: isSelected
+          ? BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Color(0xFF5669FF), width: 3),
+            )
+          : null,
+      child: Image.asset(
+        "assets/images/$imageName.png",
+        width: 26,
+        height: 24,
+        fit: BoxFit.cover,
       ),
     );
   }
