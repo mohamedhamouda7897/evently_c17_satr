@@ -1,10 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_c17_str/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en', 'US'),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       initialRoute: OnboardingScreen.routeName,
       routes: {

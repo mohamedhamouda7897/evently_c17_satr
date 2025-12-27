@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,11 +7,12 @@ class OnboardingScreen extends StatelessWidget {
 
   const OnboardingScreen({super.key});
 
-  final bool isEnglish = false;
   final bool isDark = false;
 
+  // l10n , Localization
   @override
   Widget build(BuildContext context) {
+    bool isEnglish = context.locale == Locale("en", "US");
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,7 +31,7 @@ class OnboardingScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Text(
-              "Personalize Your Experience",
+              "onboardingTitle".tr(),
               style: GoogleFonts.inter(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -37,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
+              "onboardingSubTitle".tr(),
               style: GoogleFonts.inter(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -51,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Language",
+                      "language".tr(),
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -65,9 +67,19 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          _countryWidget(isEnglish, "LR"),
+                          InkWell(
+                            onTap: () {
+                              context.setLocale(Locale("en", "US"));
+                            },
+                            child: _countryWidget(isEnglish, "LR"),
+                          ),
                           SizedBox(width: 16),
-                          _countryWidget(!isEnglish, "EG"),
+                          InkWell(
+                            onTap: () {
+                              context.setLocale(Locale("ar", "EG"));
+                            },
+                            child: _countryWidget(!isEnglish, "EG"),
+                          ),
                         ],
                       ),
                     ),
@@ -77,7 +89,7 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Theme",
+                      "theme".tr(),
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -114,7 +126,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
 
                 child: Text(
-                  "Let's Start",
+                  "start".tr(),
                   style: GoogleFonts.inter(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
