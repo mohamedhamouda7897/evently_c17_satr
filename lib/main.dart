@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_c17_str/core/my_theme_data.dart';
 import 'package:evently_c17_str/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      theme: MyThemeData.lightTheme,
+      darkTheme: MyThemeData.darkTheme,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       initialRoute: OnboardingScreen.routeName,
       routes: {
