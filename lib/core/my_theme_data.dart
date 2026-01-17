@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyThemeData {
+  static const primaryColor = Color(0xFF0E3A99);
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: Color(0xFFF2FEFF),
+    scaffoldBackgroundColor: Color(0xFFF4F7FF),
     appBarTheme: AppBarTheme(
-      backgroundColor: Color(0xFFF2FEFF),
+      backgroundColor:  Color(0xFFF4F7FF),
       centerTitle: true,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -17,7 +18,7 @@ class MyThemeData {
       titleLarge: GoogleFonts.inter(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Color(0xFF5669FF),
+        color: primaryColor,
       ),
       titleMedium: GoogleFonts.inter(
         fontSize: 16,
@@ -27,19 +28,20 @@ class MyThemeData {
       displayLarge: GoogleFonts.inter(
         fontSize: 20,
         fontWeight: FontWeight.w500,
-        color: Color(0xFF5669FF),
+        color: primaryColor,
       )
     ),
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xFF5669FF),
+      primary: primaryColor,
       onPrimary: Colors.white,
       secondary: Color(0xFF1C1C1C),
       onSecondary: Colors.white,
       error: Colors.red,
       onError: Colors.white,
-      surface: Color(0xFFF2FEFF),
+      surface:  Color(0xFFF4F7FF),
       onSurface: Colors.white,
+
     ),
   );
   static ThemeData darkTheme = ThemeData(

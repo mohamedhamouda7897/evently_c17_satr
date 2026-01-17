@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_c17_str/core/extensions.dart';
+import 'package:evently_c17_str/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const String routeName = "OnboardingScreen";
@@ -12,6 +14,7 @@ class OnboardingScreen extends StatelessWidget {
   // l10n , Localization
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     bool isEnglish = context.locale == Locale("en", "US");
     return Scaffold(
       appBar: AppBar(title: Image.asset("assets/images/logo.png")),
@@ -29,7 +32,7 @@ class OnboardingScreen extends StatelessWidget {
             ),
             Text(
               "onboardingTitle".tr(),
-              style: Theme.of(context).textTheme.titleLarge,
+              style: context.textTheme().titleLarge,
             ),
             Text(
               "onboardingSubTitle".tr(),
@@ -90,9 +93,19 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          _getThemeWidget(!isDark, "Sun", context),
+                          GestureDetector(
+                            onTap: () {
+                              themeProvider.changeTheme(ThemeMode.light);
+                            },
+                            child: _getThemeWidget(themeProvider.themeMode==ThemeMode.dark, "Sun", context),
+                          ),
                           SizedBox(width: 16),
-                          _getThemeWidget(isDark, "Moon", context),
+                          GestureDetector(
+                            onTap: () {
+                              themeProvider.changeTheme(ThemeMode.dark);
+                            },
+                            child: _getThemeWidget(themeProvider.themeMode!=ThemeMode.dark, "Moon", context),
+                          ),
                         ],
                       ),
                     ),
@@ -114,10 +127,9 @@ class OnboardingScreen extends StatelessWidget {
 
                 child: Text(
                   "start".tr(),
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                    color: Colors.white
-                  ),
-
+                  style: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.copyWith(color: Colors.white),
                 ),
               ),
             ),
