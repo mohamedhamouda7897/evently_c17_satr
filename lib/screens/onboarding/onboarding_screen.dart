@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_c17_str/core/extensions.dart';
 import 'package:evently_c17_str/providers/theme_provider.dart';
+import 'package:evently_c17_str/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,11 +30,9 @@ class OnboardingScreen extends StatelessWidget {
               "assets/images/creative.png",
               width: double.infinity,
               fit: BoxFit.cover,
+              color:Theme.of(context).colorScheme.onSecondary,
             ),
-            Text(
-              "onboardingTitle".tr(),
-              style: context.textTheme().titleLarge,
-            ),
+            Text("onboardingTitle".tr(), style: context.textTheme().titleLarge),
             Text(
               "onboardingSubTitle".tr(),
               style: Theme.of(context).textTheme.titleMedium,
@@ -95,16 +94,24 @@ class OnboardingScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              themeProvider.changeTheme(ThemeMode.light);
+                              ThemeProvider.instance.changeTheme(ThemeMode.light);
                             },
-                            child: _getThemeWidget(themeProvider.themeMode==ThemeMode.dark, "Sun", context),
+                            child: _getThemeWidget(
+                              themeProvider.themeMode == ThemeMode.dark,
+                              "Sun",
+                              context,
+                            ),
                           ),
                           SizedBox(width: 16),
                           GestureDetector(
                             onTap: () {
                               themeProvider.changeTheme(ThemeMode.dark);
                             },
-                            child: _getThemeWidget(themeProvider.themeMode!=ThemeMode.dark, "Moon", context),
+                            child: _getThemeWidget(
+                              themeProvider.themeMode != ThemeMode.dark,
+                              "Moon",
+                              context,
+                            ),
                           ),
                         ],
                       ),
@@ -116,14 +123,9 @@ class OnboardingScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginScreen.routeName);
+                },
 
                 child: Text(
                   "start".tr(),
